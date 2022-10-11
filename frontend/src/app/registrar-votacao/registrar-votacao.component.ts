@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {RestService} from "../service/RestService";
 import {Participante} from "../model/participante";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-registrar-votacao',
@@ -14,7 +15,8 @@ export class RegistrarVotacaoComponent implements OnInit {
   voto = '';
 
   constructor(private route : ActivatedRoute,
-              private restService : RestService) { }
+              private restService : RestService,
+              private location : Location) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -29,6 +31,10 @@ export class RegistrarVotacaoComponent implements OnInit {
       let voto = response as Participante;
       this.voto = voto.nome;
     });
+  }
+
+  voltarPagina() {
+    this.location.back();
   }
 
 }
